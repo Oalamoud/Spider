@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 
 
 # Get domain name (example.com)
-def get_domain_name(url, lvl=2):
+def get_domain_name(url, lvl=3):
     try:
         results = get_sub_domain_name(url).split('.')
         domain =''
