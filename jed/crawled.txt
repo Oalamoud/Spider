@@ -1,9 +1,0 @@
-http://services.jeddah.gov.sa/Customers/eservices.aspx
-http://services.jeddah.gov.sa/Eserv/e_Investment
-http://services.jeddah.gov.sa/OpenData/Default.aspx
-http://www.jeddah.gov.sa/Amanah/Projects/index.php#4
-http://www.jeddah.gov.sa/Jeddah/HistoricalPlaces/UNESCO/index.php
-http://www.jeddah.gov.sa/JeddahFriends/index.php
-http://www.jeddah.gov.sa/MediaCenter/News/index.php
-http://www.jeddah.gov.sa/Municipalities/index.php
-http://www.jeddah.gov.sa/index.php
