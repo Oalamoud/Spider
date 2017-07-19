@@ -13,10 +13,12 @@ def create_project_dir(directory):
 def create_data_files(project_name, base_url):
     queue = os.path.join(project_name, 'queue.txt')
     crawled = os.path.join(project_name, "crawled.txt")
+    www = os.path.join(project_name,'www')
     if not os.path.isfile(queue):
         write_file(queue, base_url)
     if not os.path.isfile(crawled):
         write_file(crawled, '')
+
 
 
 # Create a new file
