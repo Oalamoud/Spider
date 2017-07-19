@@ -2,6 +2,7 @@ from link_finder import LinkFinder
 from domain import *
 from general import *
 import Library.Connection as CustomConnection
+import os
 
 
 class Spider:
@@ -10,6 +11,7 @@ class Spider:
     domain_name = ''
     queue_file = ''
     crawled_file = ''
+    web_file = ''
     queue = set()
     crawled = set()
 
@@ -20,6 +22,7 @@ class Spider:
         Spider.domain_name = domain_name
         Spider.queue_file = Spider.project_name + '/queue.txt'
         Spider.crawled_file = Spider.project_name + '/crawled.txt'
+        Spider.web_file = os.path.join(Spider.project_name,'www')
         self.boot()
         self.crawl_page('First spider', Spider.base_url)
 
@@ -40,6 +43,7 @@ class Spider:
             Spider.queue.remove(page_url)
             Spider.crawled.add(page_url)
             Spider.update_files()
+            Spider.add_to_web_tree(page_url)
 
     # Converts raw response data into readable information and checks for proper html formatting
     @staticmethod
@@ -55,13 +59,36 @@ class Spider:
     @staticmethod
     def add_links_to_queue(links):
         for url in links:
-            if (url in Spider.queue) or (url in Spider.crawled):
-                continue
-            if Spider.domain_name != get_domain_name(url):
-                continue
-            Spider.queue.add(url)
+            if (url not in Spider.queue) and (url not in Spider.crawled) and (Spider.domain_name == get_domain_name(url)):
+                Spider.queue.add(url)
 
     @staticmethod
     def update_files():
         set_to_file(Spider.queue, Spider.queue_file)
         set_to_file(Spider.crawled, Spider.crawled_file)
+
+    @staticmethod
+    def add_to_web_tree(path):
+        try:
+            page_html = CustomConnection.URL(path)
+            path = path.split(Spider.domain_name,1)[1][1:]
+            path = os.path.join(Spider.web_file, path)
+            if '/' in path:
+                path = path.split('/')
+                file = path.pop(-1)
+                path = '/'.join(path)
+                file_path = os.path.join(path, file)
+            else:
+                file_path = path
+
+            if not os.path.exists(path):
+                os.makedirs(path)
+            if not os.path.isfile(file_path):
+                write_file(file_path, page_html)
+        except:
+            print("Path is not working correct")
+            raise
+
+if __name__ == "__main__":
+    s = Spider("test", 'http://j.jj.j/pp/pp/dkn/p.php', 'j.jj.j')
+    s.add_to_web_tree('http://j.jj.j/pp/p1.html')
