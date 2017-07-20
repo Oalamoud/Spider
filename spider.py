@@ -75,7 +75,7 @@ class Spider:
             path = path.split(Spider.domain_name,1)[1][1:]
             path = Spider.web_file+"/"+ path
             print(path)
-            if '/' in path:
+            if '/' in path and '.' in file_path:
                 path = path.split('/')
                 file = path.pop(-1)
                 path = os.sep.join(path)
@@ -87,6 +87,9 @@ class Spider:
                 file_path = file_path.split("#",1)[0]
             if "?" in file_path:
                 file_path = file_path.split("?",1)[0]
+            # TODO: Test if it is working
+            if '.' not in file_path:
+                file_path = os.path.join(file_path, "index.html")
             if file_path.endswith('.php') or file_path.endswith('.aspx'):
                 file_path = file_path.split('.',1)[0]+".html"
             if not os.path.exists(path):

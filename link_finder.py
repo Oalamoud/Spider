@@ -17,9 +17,19 @@ class LinkFinder(HTMLParser):
                 if attribute == 'href':
                     url = parse.urljoin(self.base_url, value)
                     self.links.add(url)
+        if tag == 'link':
+            for (attribute, value) in attrs:
+                if attribute == 'href':
+                    css_url = value.split('/')
+                    base_url = self.base_url.split('/')
+                    url = parse.urljoin(self.base_url, value)
+                    self.links.add(url)
 
     def page_links(self):
         return self.links
 
     def error(self, message):
         pass
+
+if __name__ == "__main__":
+    
