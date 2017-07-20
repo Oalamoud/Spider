@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 
 
 # Get domain name (example.com)
-def get_domain_name(url, lvl=3):
+def get_domain_name(url, lvl=4):
     try:
         results = get_sub_domain_name(url).split('.')
         domain =''
@@ -19,6 +19,3 @@ def get_sub_domain_name(url):
         return urlparse(url).netloc
     except:
         return ''
-
-if __name__ == '__main__':
-	print(get_domain_name('https://jeddah.gov.sa/home',3))

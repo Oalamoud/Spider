@@ -83,6 +83,12 @@ class Spider:
             else:
                 file_path = path
 
+            if "#" in file_path:
+                file_path = file_path.split("#",1)[0]
+            if "?" in file_path:
+                file_path = file_path.split("?",1)[0]
+            if file_path.endswith('.php') or file_path.endswith('.aspx'):
+                file_path = file_path.split('.',1)[0]+".html"
             if not os.path.exists(path):
                 os.makedirs(path)
             if not os.path.isfile(file_path):
