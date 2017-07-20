@@ -70,13 +70,15 @@ class Spider:
     @staticmethod
     def add_to_web_tree(path):
         try:
+            print(path)
             page_html = CustomConnection.URL(path)
             path = path.split(Spider.domain_name,1)[1][1:]
-            path = os.path.join(Spider.web_file, path)
+            path = Spider.web_file+"/"+ path
+            print(path)
             if '/' in path:
                 path = path.split('/')
                 file = path.pop(-1)
-                path = '/'.join(path)
+                path = os.sep.join(path)
                 file_path = os.path.join(path, file)
             else:
                 file_path = path
@@ -90,5 +92,5 @@ class Spider:
             raise
 
 if __name__ == "__main__":
-    s = Spider("test", 'http://j.jj.j/pp/pp/dkn/p.php', 'j.jj.j')
-    s.add_to_web_tree('http://j.jj.j/pp/p1.html')
+    s = Spider("j", 'http://www.jeddah.gov.sa/index.php', 'jeddah.gov.sa')
+    s.add_to_web_tree('http://www.jeddah.gov.sa/Amanah/index.php')

@@ -1,4 +1,5 @@
 import os
+import io
 
 
 # Each website is a separate project (folder)
@@ -23,8 +24,15 @@ def create_data_files(project_name, base_url):
 
 # Create a new file
 def write_file(path, data):
-    with open(path, 'w') as f:
-        f.write(data)
+    try:
+    #    with open(path, 'w') as f:
+		#	f.write(data)
+        with io.open(path, "w", encoding="utf-8") as f:
+            f.write(data)
+    except:
+        print("Cannot write to file")
+        raise		
+
 
 
 # Add data onto an existing file

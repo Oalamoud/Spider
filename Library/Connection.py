@@ -44,7 +44,6 @@ def VisitWebPage():
             # This will contains something like text/html; charset=utf-8
         '''
         charset = HTML_RAW.info().get_content_charset()
-
         try:
             DECODED_HTML = HTML_RAW.read().decode(charset)
         except:
